@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+    reverse-proxy:
+        build: ./reverse-proxy
+        volumes:
+          - $PWD/proxy-sites/:/etc/nginx/locations/:ro
+          - /etc/ssl/private/sites/:/ssl:ro
+        ports:
+        - "443:443"
+
+    site:
+      image: nginx:alpine
+      volumes:
+          - $PWD/site:/usr/share/nginx/html:ro
+
+    acme:
+      build: ./acme
+      volumes:
+        - /etc/ssl/private/sites/:/ssl
+        - /etc/ssl/private/acme/:/acme
+      environment:
+        - DOMAINS=test.site1.com site1.com www.site1.com site2.com ...
+
+    # This just upgrades almost everything to https, but forwards acme challenges through
+    https-upgrader:
+      build: ./https-upgrader
+      ports:
+        - "80:80"
