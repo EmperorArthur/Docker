@@ -14,6 +14,13 @@ do
 	DOMAINS_INTERNAL="$DOMAINS_INTERNAL -d $domain"
 done
 
+#Set the staging flag unless IsProduction is "production"
+STAGING="--staging"
+if [ "$IS_PRODUCTION" = "production" ]; then
+    echo "Running in production mode!"
+    STAGING=""
+fi
+
 #Can't exit immediately if a command fails since acme.sh returns 2 if the keys already exist
 #echo the command being run (with variables substituted)
 set -x
@@ -27,7 +34,7 @@ set -x
     --key-file "$ACME_SITE_FOLDER/site.key" \
     --ca-file "$ACME_SITE_FOLDER/ca.cer" \
     --fullchain-file "$ACME_SITE_FOLDER/fullchain.cer" \
-    --staging \
+    $STAGING \
     $DOMAINS_INTERNAL
 
 retval=$?

@@ -28,6 +28,9 @@ RUN echo '23 0 * * * /app/acme.sh --cron --home "/acme" >> "/acme/acme_cron.log"
 
 COPY startup.sh /app/startup.sh
 
+#If this is set to "production", then get keys from the real LetsEncrpyt instead of their testing server
+ENV IS_PRODUCTION "staging"
+
 #Set this to determine what domains we support
 #Use the form "domain1 domain2 domain3"
 ENV DOMAINS ""

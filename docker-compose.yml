@@ -21,6 +21,7 @@ services:
         - /etc/ssl/private/acme/:/acme
       environment:
         - DOMAINS=test.site1.com site1.com www.site1.com site2.com ...
+#        - IS_PRODUCTION=production
 
     # This just upgrades almost everything to https, but forwards acme challenges through
     https-upgrader:
