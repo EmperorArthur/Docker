@@ -14,6 +14,7 @@ services:
       volumes:
           - $PWD/site:/usr/share/nginx/html:ro
 
+    #this obtains SSL certificates from LetsEncrypt via http
     acme:
       build: ./acme
       volumes:
@@ -22,9 +23,18 @@ services:
       environment:
         - DOMAINS=test.site1.com site1.com www.site1.com site2.com ...
 #        - IS_PRODUCTION=production
+      networks:
+        - http
+      depends_on:
+        - https-upgrader
 
     # This just upgrades almost everything to https, but forwards acme challenges through
     https-upgrader:
       build: ./https-upgrader
+      networks:
+        - http
       ports:
         - "80:80"
+
+networks:
+  http:
