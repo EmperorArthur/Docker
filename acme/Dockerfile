@@ -5,6 +5,8 @@ RUN git clone https://github.com/Neilpang/acme.sh.git /app
 
 FROM alpine
 
+EXPOSE 80/tcp
+
 RUN apk update -f \
   && apk --no-cache add -f \
   openssl \

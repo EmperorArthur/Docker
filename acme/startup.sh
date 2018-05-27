@@ -40,10 +40,10 @@ set -x
 retval=$?
 set +x
 
-if [ $retval -ne 0 ]; then
-    if [ $retval -ne 2 ]; then
+if [ ${retval} -ne 0 ]; then
+    if [ ${retval} -ne 2 ]; then
     echo "acme.sh failed! Returned: $retval"
-    exit
+    exit ${retval}
     fi
 fi
 
@@ -51,4 +51,4 @@ set -ex
 
 crond
 echo "" > "$ACME_HOME_FOLDER/acme_cron.log"
-exec tail -f "$ACME_HOME_FOLDER/acme_cron.log"
+exec tail -F "$ACME_HOME_FOLDER/acme_cron.log"
