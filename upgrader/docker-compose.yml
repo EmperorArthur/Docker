@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+    #this obtains SSL certificates from LetsEncrypt via http
+    acme:
+      build: ./acme
+      volumes:
+        - /etc/ssl/private/sites/:/ssl
+        - /etc/ssl/private/acme/:/acme
+      environment:
+        - DOMAINS=test.site1.com site1.com www.site1.com site2.com ...
+#        - IS_PRODUCTION=production
+
+    # This just upgrades almost everything to https, but forwards acme challenges through
+    https-upgrader:
+      build: ./https-upgrader
+      ports:
+        - "80:80"
+      depends_on:
+        - acme
