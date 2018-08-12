@@ -27,9 +27,6 @@ http {
 
     #gzip  on;
 
-    include /etc/nginx/conf.d/*.conf;
-    include /etc/nginx/conf.d/*.nginx;
-
     server {
         listen       443;
         server_name  $server_name;
@@ -77,5 +74,8 @@ http {
         #    deny  all;
         #}
     }
+
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/conf.d/*.nginx;
 }
 
