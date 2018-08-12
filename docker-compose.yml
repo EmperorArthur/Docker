@@ -5,6 +5,7 @@ services:
         build: ./reverse-proxy
         volumes:
           - $PWD/proxy-sites/:/etc/nginx/locations/:ro
+          - $PWD/proxy-servers/:/etc/nginx/conf.d/:ro
           - /etc/ssl/private/sites/:/ssl:ro
         ports:
         - "443:443"

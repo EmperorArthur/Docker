@@ -6,10 +6,11 @@ VOLUME /etc/nginx/locations/
 #nginx uses:
 #ssl_certificate "/ssl/fullchain.cer";
 #ssl_certificate_key "/ssl/site.key";
-RUN mkdir -p /site/
-VOLUME /site/
+RUN mkdir -p /ssl/
+VOLUME /ssl/
 
 RUN rm /etc/nginx/conf.d/*
+VOLUME /etc/nginx/conf.d/
 
 EXPOSE 443
 
