@@ -27,6 +27,9 @@ http {
 
     #gzip  on;
 
+    #Disable body size checks.  Enable uploading files over 1 Megabyte
+    client_max_body_size 0;
+
     server {
         listen       443;
         server_name  $server_name;
