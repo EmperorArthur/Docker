@@ -35,7 +35,8 @@ set -x
     --ca-file "$ACME_SITE_FOLDER/ca.cer" \
     --fullchain-file "$ACME_SITE_FOLDER/fullchain.cer" \
     $STAGING \
-    $DOMAINS_INTERNAL
+    $DOMAINS_INTERNAL \
+    $EXTRA_ARGUMENTS
 
 retval=$?
 set +x
