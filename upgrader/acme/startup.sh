@@ -50,6 +50,4 @@ fi
 
 set -ex
 
-crond
-echo "" > "$ACME_HOME_FOLDER/acme_cron.log"
-exec tail -F "$ACME_HOME_FOLDER/acme_cron.log"
+crond -f

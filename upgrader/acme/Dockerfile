@@ -26,7 +26,7 @@ VOLUME /acme
 VOLUME /ssl
 
 #Set acme to run once per day (not at midnight exactly though)
-RUN echo '23 0 * * * /app/acme.sh --cron --home "/acme" >> "/acme/acme_cron.log"'|crontab -
+RUN echo '23 0 * * * /app/acme.sh --cron --home "/acme"'|crontab -
 
 COPY startup.sh /app/startup.sh
 
