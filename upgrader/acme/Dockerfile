@@ -1,6 +1,5 @@
-FROM alpine as build
+FROM alpine/git as build
 
-RUN apk add --no-cache git
 RUN git clone https://github.com/Neilpang/acme.sh.git /app
 
 FROM alpine
